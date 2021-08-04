@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Georama:ital,wght@1,300&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("ramadan.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    flex-direction: column;
+    background-position: center center;
+    font-family: "Georama", sans-serif;
+    margin: 0;
+}
+
+h1 {
+    font-weight: normal;    
+    font-size: 2rem;
+    margin-top: 6rem;
+}
+
+.big-text {
+    font-size: 5rem;
+    line-height: 1;
+    margin: 0 2rem;
+    font-weight: bold;
+}
+.countdown-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.countdown-element {
+    text-align: center;
+}
+
+.countdown-element > span {
+    font-size: 2rem;
+}

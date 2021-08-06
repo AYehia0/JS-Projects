@@ -1,7 +1,7 @@
 const questions = [
 
     {
-        question : 'How many gods out there ?What is the range of numbers you can store in a variable of type byte?',
+        question : 'What is the range of numbers you can store in a variable of type byte?',
         answers : {
             a: "0 to 65535",
             b: "0 to 255",

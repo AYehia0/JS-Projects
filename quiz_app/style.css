@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Georama:ital,wght@1,300&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Georama", sans-serif;
+    display: flex;
+    background-color: #ffcfdf;
+    background-image: linear-gradient(315deg, #ffcfdf 0%, #b0f3f1 74%);
+    margin: 0;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 {
+    font-weight: bolder;
+    padding-left: 30px;
+}
+
+#mcqs{
+    padding: 20px;
+}
+
+.quiz-container {
+    background-color: white;
+    width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2)
+}
+
+button {
+    display: inline;
+    width: 100%;
+    height: 50px;
+    border: none;
+    background-color: #EAB543;
+    font-size: 1.4rem;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+button:hover {
+    background-color: #dfa62b;
+    cursor: pointer;
+}

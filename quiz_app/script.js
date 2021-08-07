@@ -58,7 +58,6 @@ const questions = [
         },
         correct: "b"
     }
-
 ]
 
 // return all the possible answers in a question to make room for
@@ -66,6 +65,7 @@ function getLengthOfAnswers(question) {
     return Object.keys(question['answers']).length
 }
 
+// generates Html Question Template using id list of max choices
 function generateQuestionHtml(mcqLength, parentElement, contents ) {
 
     // max mcq questions 
@@ -83,11 +83,8 @@ function generateQuestionHtml(mcqLength, parentElement, contents ) {
             </li>
         </ul>
         `
-
         parentElement.insertAdjacentHTML('beforeend', htmlTemplate)
-
     }
-
 }
 // remove by tagname ul
 function removeAppendedElements() {
@@ -98,8 +95,38 @@ function removeAppendedElements() {
     }
 
 }
-currentQuestion = 0
 
+// check the correct answer by checking the id stored for each question
+function checkCorrectAns(id) {
+
+    // getting the current question 
+    const correctAns = questions[currentQuestion]['correct']
+    if (id == correctAns)
+        return true
+    return false
+}
+
+// get selected answer by checking for .checked for each radio button
+function getSelectedAnswer() {
+    const allAnswers = document.getElementsByTagName('input')
+
+    for(var i=0; i<allAnswers.length; i++) {
+        if (allAnswers[i].checked)
+            return allAnswers[i]
+    }
+    return null
+}
+
+// Display the score and change the button from submit to reload(start over)
+function restScore(score) {
+
+    // getting the quiz container to remove all inside
+    const container = document.querySelector(".quiz-container")
+
+    // changing the innerHtml
+    container.innerHTML = `<h2>You scored ${score}/${questions.length}, Yeah!!</h2><button onClick="window.location.reload()">Start Again</button>`
+
+}
 // update the html with the question from the question list
 function loadQuestion() {
     
@@ -121,21 +148,42 @@ function loadQuestion() {
 
 }
 
-loadQuestion()
-
-
 // getting the submit button 
 const submitButton = document.querySelector('#send-answer')
-
 // adding eventListener 
 submitButton.addEventListener('click', ()=> {
 
-    currentQuestion++
-    // remove the appended items
-    removeAppendedElements()
+    if (currentQuestion < questions.length) {
+        const ans = getSelectedAnswer()
 
-    loadQuestion()
+        // check if no element was selected
+        if (ans){
+            // get the id
+            ansId = ans.id
 
+            // check if the answer is correct or not
+            if (checkCorrectAns(ansId))
+                score++
+            
+            // remove the appended items
+            removeAppendedElements()
 
+            currentQuestion++
+
+            if (currentQuestion < questions.length) 
+                loadQuestion()
+
+        }
+    }
+    if (currentQuestion == questions.length){
+        // displaying the score
+        console.log("Last score is:", score)
+
+        restScore(score)
+    }
 })
 
+currentQuestion = 0
+score = 0
+
+loadQuestion()

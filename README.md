@@ -8,3 +8,7 @@ Practicing web-dev by following florin's tut with tweaking things myself.
 
 - link
 [When is Ramadan?](https://ayehia0.github.io/JS-Projects/countdown_timer/)
+
+# Quiz app
+
+- [Test your programming knowledge](https://ayehia0.github.io/JS-Projects/quiz_app/)

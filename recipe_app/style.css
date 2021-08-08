@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Georama:ital,wght@1,300&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #C9D6FF;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-family: "Georama", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.main-container {
+    width: 500px;
+    box-shadow: 0 0 5px #3333331a;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+header input {
+    padding: 0.4rem 0.9rem;
+    border-radius: 2px;
+    border: none;
+    background-color: white;
+    border-radius: 2rem;
+}
+header button {
+    background-color: transparent;
+    color: white;
+    font-size: 1.4rem;
+    border: none;
+    margin-left: 1rem;
+
+}
+img {
+    max-width: 100%;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fav-container {
+    padding: 2rem;
+    background-color: #c7dce6;
+    text-align: center;
+}
+
+.fav-meals {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+.fav-meals li img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.fav-meals li {
+    width: 80px;
+    margin: 5px;
+}
+
+
+.meal-container {
+    margin: 30px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #3333331a;
+    overflow: hidden;
+}
+.meal-header{
+    position: relative;
+}
+.meal-header .random-meal {
+    position: absolute;
+    top: 10px;
+    background-color: rgb(233, 227, 227);
+    padding: .5rem .5rem;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.meal-header img {
+    object-fit: cover;
+    height: 300px;
+    width: 100%;
+}
+
+.meal-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.meal-body h4 {
+    margin: 20px;
+}
+
+.meal-body .fav-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    color:  rgb(158, 157, 157);
+    cursor: pointer;
+}
+
+.meal-body .fav-btn.active {
+    color: red;
+}

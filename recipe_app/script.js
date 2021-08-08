@@ -58,7 +58,7 @@ function getMealsFromLocalStorage(){
     // so this is how to get items from the local storage
     const mealIds = JSON.parse(localStorage.getItem('mealIds'))
 
-    return [] ? mealIds===null : mealIds
+    return mealIds === null ? [] : mealIds
 }
 
 

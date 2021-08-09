@@ -48,37 +48,74 @@ function createMeal(meal, isRandom=false) {
     btn.addEventListener('click', ()=>{
         // changing the heart button onClick to active
 
-        btn.classList.toggle('active')
+        if (btn.classList.contains('active')){
+            // remove it
+            btn.classList.remove('active')
+            removeMealFromLocalStorage(meal)
+        }else{
+            // add it
+            btn.classList.add('active')
+            addMealToLocalStorage(meal)
+        }
     })
 }
-
 
 function getMealsFromLocalStorage(){
 
     // so this is how to get items from the local storage
-    const mealIds = JSON.parse(localStorage.getItem('mealIds'))
+    const meal = JSON.parse(localStorage.getItem('meal'))
 
-    return mealIds === null ? [] : mealIds
+    return meal === null ? [] : meal
 }
 
 
-// add a meal to local storage by its id
+// add a all meal info to local storage 
 function addMealToLocalStorage(meal) {
+
+    const mealTemplate = {
+        mealId: meal['idMeal'],
+        mealName: meal['strMeal'],
+        mealPic: meal['strMealThumb']
+    } 
     // getting ids 
-    const mealIds = getMealsFromLocalStorage()
+    let meals = getMealsFromLocalStorage()
 
-    console.log(mealIds)
-
+    meals.push(mealTemplate)
     // updating the local storage
     // https://stackoverflow.com/questions/31048953/what-does-the-three-dots-notation-do-in-javascript
-    localStorage.setItem('mealIds', JSON.stringify([...mealIds, mealId]))
+    localStorage.setItem('meal', JSON.stringify(meals))
 }
 
-// remove an id from local storage by its id
-function removeMealFromLocalStorage(id) {
-    const mealIds = getMealsFromLocalStorage()
+// remove a meal by its id
+function removeMealFromLocalStorage(meal) {
 
-    localStorage.setItem('mealIds', JSON.stringify(mealIds.filter(id => id !== mealId)))
-    
+    // getting all the meals from storage
+    const meals = getMealsFromLocalStorage()
+
+    // getting the id of the one to search
+    const mealId = meal['idMeal']
+
+    // searching 
+    var ind
+    for(var i=0;i<meals.length;i++){
+        if(meals[i].mealId === mealId){
+            ind = i
+            break
+        }
+    }
+
+    // removing
+    // The splice() method changes the contents of an array by removing or replacing existing elements and/or adding new elements in place
+    // short the shit : it removes at index
+    meals.splice(ind, 1)
+
+    // setItem put a key-value pair on the local storage
+    // local storage stores as strings
+    localStorage.setItem('meal', JSON.stringify(meals))
 }
+
+function addMealToFav(meal){
+
+}
+
 getRandomMeal()

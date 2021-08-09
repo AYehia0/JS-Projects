@@ -73,9 +73,9 @@ function getMealsFromLocalStorage(){
 function addMealToLocalStorage(meal) {
 
     const mealTemplate = {
-        mealId: meal['idMeal'],
-        mealName: meal['strMeal'],
-        mealPic: meal['strMealThumb']
+        idMeal: meal['idMeal'],
+        strMeal: meal['strMeal'],
+        strMealThumb: meal['strMealThumb']
     } 
     // getting ids 
     let meals = getMealsFromLocalStorage()

@@ -46,13 +46,15 @@ function createMeal(meal, isRandom=false) {
 
     const btn = mealContainer.querySelector('.fav-btn')
     btn.addEventListener('click', ()=>{
-        // changing the heart button onClick to active
 
+        // changing the heart button onClick to active
         if (btn.classList.contains('active')){
+
             // remove it
             btn.classList.remove('active')
             removeMealFromLocalStorage(meal)
         }else{
+
             // add it
             btn.classList.add('active')
             addMealToLocalStorage(meal)
@@ -114,8 +116,39 @@ function removeMealFromLocalStorage(meal) {
     localStorage.setItem('meal', JSON.stringify(meals))
 }
 
+
+// adding meals to the favourite 
 function addMealToFav(meal){
+
+    mealLiTemplate = `
+        <img src=${meal['strMealThumb']} alt=${meal['strMeal']}><span>${meal['strMeal']}</span><button class="remove-meal-fav"><i class="fas fa-window-close"></i></button>
+    `
+    const favMealContainer = document.querySelector('.fav-meals')
+
+    const favLi = document.createElement('li')
+
+    favLi.innerHTML = mealLiTemplate
+
+    // adding to the html
+    favMealContainer.appendChild(favLi)
+
+}
+
+// get the liked meals from localStorage then add to the top of the page
+function updateMealsToFav() {
+
+    // getting from local storage
+    const meals = getMealsFromLocalStorage()
+
+    // adding them to the html by calling addMealToFav
+    for(var i=0; i<meals.length; i++){
+
+        // adding to HTML
+        addMealToFav(meals[i])
+    }
+
 
 }
 
 getRandomMeal()
+updateMealsToFav()

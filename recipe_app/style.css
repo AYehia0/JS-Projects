@@ -144,3 +144,15 @@ header {
 .fav-meals li:hover .remove-meal-fav{
     opacity: 1;
 }
+
+/* hacking this shit to shorten the name */
+.fav-meals li span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    width: 75px;
+}
+#search-btn {
+    cursor: pointer;
+}

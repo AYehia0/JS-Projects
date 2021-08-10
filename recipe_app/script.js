@@ -88,6 +88,10 @@ function addMealToLocalStorage(meal) {
     // updating the local storage
     // https://stackoverflow.com/questions/31048953/what-does-the-three-dots-notation-do-in-javascript
     localStorage.setItem('meal', JSON.stringify(meals))
+
+    // reloading the page
+    reloadPage(500)
+
 }
 
 
@@ -100,7 +104,6 @@ function removeMealById(mealId, meals) {
             break
         }
     }
-
     // removing
     // The splice() method changes the contents of an array by removing or replacing existing elements and/or adding new elements in place
     // short the shit : it removes at index
@@ -110,6 +113,8 @@ function removeMealById(mealId, meals) {
     // local storage stores as strings
     localStorage.setItem('meal', JSON.stringify(meals))
 
+    // reloading the page
+    reloadPage(250)
 }
 // remove a meal by its id
 function removeMealFromLocalStorage(meal) {
@@ -122,7 +127,6 @@ function removeMealFromLocalStorage(meal) {
     removeMealById(mealId, meals)
 
 }
-
 
 // adding meals to the favourite 
 function addMealToFav(meal){
@@ -171,7 +175,11 @@ function removeMeal(){
     })
 }
 
-
+function reloadPage(timeout){
+    setTimeout(() => {
+        location.reload()
+    }, timeout);
+}
 getRandomMeal()
 updateMealsToFav()
 removeMeal()

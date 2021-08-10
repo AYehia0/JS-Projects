@@ -195,7 +195,11 @@ const searchInput = document.getElementById('search-input')
 
 searchBtn.addEventListener('click', async () => {
     // fetching the response and updating the page
+    const mealContainer = document.querySelector('.meal-container')
     
+    // cleaning the container 
+    mealContainer.innerHTML = ''
+
     //getting the search value
     const searchValue = searchInput.value
 

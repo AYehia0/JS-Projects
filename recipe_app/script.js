@@ -94,8 +94,8 @@ function addMealToLocalStorage(meal) {
 function removeMealById(mealId, meals) {
     // searching 
     var ind
-    for(var i=0;i<meals.length;i++){
-        if(meals[i].mealId === mealId){
+    for(var i=0; i<meals.length; i++){
+        if(meals[i].idMeal === mealId){
             ind = i
             break
         }

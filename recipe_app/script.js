@@ -10,15 +10,16 @@ async function getRandomMeal() {
     const response = await fetch(apiCalls['getRandomMeal'])
     const mealData = await response.json()
     const data = mealData['meals'][0]
-    console.log(data)
 
     // adding the meal to the html 
     createMeal(data, isRandom=true)
 }
-async function searchByName(name) {
+async function searchMealByName(name) {
     const response = await fetch(apiCalls['searchMealByName']+name)
     const mealData = await response.json()
-    console.log(mealData)
+    const data = mealData['meals']
+
+    return data
 }
 async function searchById(id) {
     const response = await fetch(apiCalls['getMealById']+id)
@@ -29,8 +30,6 @@ async function searchById(id) {
 function createMeal(meal, isRandom=false) {
 
     mealTemp = `            
-            <div class="meal-header">
-
             ${isRandom ? `<span class="random-meal">Random Meals</span>` : ''}
                 <img src="${meal['strMealThumb']}" alt="">
             </div>
@@ -39,12 +38,20 @@ function createMeal(meal, isRandom=false) {
 
                 <!-- heart -->
                 <button class="fav-btn"><i class="fas fa-heart"></i></button>
-            </div>
             `
 
     const mealContainer = document.querySelector('.meal-container')
 
-    mealContainer.innerHTML = mealTemp
+    // creating the div
+    const mealToBeAdded = document.createElement('div')
+
+    // adding the class
+    mealToBeAdded.classList.add('meal-header')
+
+    // adding the html
+    mealToBeAdded.innerHTML = mealTemp
+
+    mealContainer.appendChild(mealToBeAdded)
 
     const btn = mealContainer.querySelector('.fav-btn')
     btn.addEventListener('click', ()=>{
@@ -180,6 +187,33 @@ function reloadPage(timeout){
         location.reload()
     }, timeout);
 }
+
+
+// searching 
+const searchBtn = document.getElementById('search-btn')
+const searchInput = document.getElementById('search-input')
+
+searchBtn.addEventListener('click', async () => {
+    // fetching the response and updating the page
+    
+    //getting the search value
+    const searchValue = searchInput.value
+
+    // if it's not null value aka empty
+    if (searchValue) {
+        const meals = await searchMealByName(searchValue)
+
+        if (meals) {
+            // displaying top 5 meals
+
+            let topFiveMeals = meals.slice(0,5)
+
+            topFiveMeals.forEach(meal =>{
+                createMeal(meal, false)
+            })
+        }
+    }
+})
 getRandomMeal()
 updateMealsToFav()
 removeMeal()

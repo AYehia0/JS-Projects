@@ -12,3 +12,7 @@ Practicing web-dev by following florin's tut with tweaking things myself.
 # Quiz app
 
 - [Test your programming knowledge](https://ayehia0.github.io/JS-Projects/quiz_app/)
+
+# Recipe app
+
+- [Food? why not?](https://ayehia0.github.io/JS-Projects/recipe_app/)

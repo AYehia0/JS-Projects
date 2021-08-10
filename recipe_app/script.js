@@ -4,6 +4,8 @@ apiCalls = {
     getMealById : "https://themealdb.com/api/json/v1/1/lookup.php?i="
 }
 
+const favMealContainer = document.querySelector('.fav-meals')
+
 async function getRandomMeal() {
     const response = await fetch(apiCalls['getRandomMeal'])
     const mealData = await response.json()
@@ -88,15 +90,8 @@ function addMealToLocalStorage(meal) {
     localStorage.setItem('meal', JSON.stringify(meals))
 }
 
-// remove a meal by its id
-function removeMealFromLocalStorage(meal) {
 
-    // getting all the meals from storage
-    const meals = getMealsFromLocalStorage()
-
-    // getting the id of the one to search
-    const mealId = meal['idMeal']
-
+function removeMealById(mealId, meals) {
     // searching 
     var ind
     for(var i=0;i<meals.length;i++){
@@ -114,16 +109,28 @@ function removeMealFromLocalStorage(meal) {
     // setItem put a key-value pair on the local storage
     // local storage stores as strings
     localStorage.setItem('meal', JSON.stringify(meals))
+
+}
+// remove a meal by its id
+function removeMealFromLocalStorage(meal) {
+    // getting all the meals from storage
+    const meals = getMealsFromLocalStorage()
+
+    // getting the id of the one to search
+    const mealId = meal['idMeal']
+
+    removeMealById(mealId, meals)
+
 }
 
 
 // adding meals to the favourite 
 function addMealToFav(meal){
 
+    console.log(meal)
     mealLiTemplate = `
-        <img src=${meal['strMealThumb']} alt=${meal['strMeal']}><span>${meal['strMeal']}</span><button class="remove-meal-fav"><i class="fas fa-window-close"></i></button>
+        <img src=${meal['strMealThumb']} alt="${meal['strMeal']}" ><span>${meal['strMeal']}</span><button d="${meal.idMeal}" class="remove-meal-fav"><i class="fas fa-window-close"></i></button>
     `
-    const favMealContainer = document.querySelector('.fav-meals')
 
     const favLi = document.createElement('li')
 
@@ -131,7 +138,6 @@ function addMealToFav(meal){
 
     // adding to the html
     favMealContainer.appendChild(favLi)
-
 }
 
 // get the liked meals from localStorage then add to the top of the page
@@ -146,9 +152,26 @@ function updateMealsToFav() {
         // adding to HTML
         addMealToFav(meals[i])
     }
-
-
+    
 }
+function removeMeal(){
+    // checking for remove
+    const removeButton = document.querySelectorAll('.remove-meal-fav')
+    removeButton.forEach( el =>{
+        el.addEventListener('click', () => {
+            // delete 
+            const id = el.getAttribute('d')
+
+            // getting data from localStorage
+            const meals = getMealsFromLocalStorage()
+
+            // removing
+            removeMealById(id, meals)
+        })
+    })
+}
+
 
 getRandomMeal()
 updateMealsToFav()
+removeMeal()

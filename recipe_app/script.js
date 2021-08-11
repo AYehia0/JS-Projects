@@ -11,6 +11,7 @@ async function getRandomMeal() {
     const mealData = await response.json()
     const data = mealData['meals'][0]
 
+    console.log(data)
     // adding the meal to the html 
     createMeal(data, isRandom=true)
 }
@@ -83,10 +84,25 @@ function getMealsFromLocalStorage(){
 // add a all meal info to local storage 
 function addMealToLocalStorage(meal) {
 
+    // getting all the ingredints 
+    const maxIngred = 20
+    const ingredients = []
+
+    for(var i=1; i<=maxIngred; i++) {
+        let ing = meal[`strIngredient${i}`]
+
+        if (!ing) {
+            break
+        }
+        ingredients.push(ing)
+    }
+
     const mealTemplate = {
         idMeal: meal['idMeal'],
         strMeal: meal['strMeal'],
-        strMealThumb: meal['strMealThumb']
+        strMealThumb: meal['strMealThumb'],
+        strInstructions: meal['strInstructions'],
+        strIngredients:ingredients
     } 
     // getting ids 
     let meals = getMealsFromLocalStorage()
@@ -97,7 +113,7 @@ function addMealToLocalStorage(meal) {
     localStorage.setItem('meal', JSON.stringify(meals))
 
     // reloading the page
-    reloadPage(500)
+    //reloadPage(500)
 
 }
 
@@ -138,7 +154,6 @@ function removeMealFromLocalStorage(meal) {
 // adding meals to the favourite 
 function addMealToFav(meal){
 
-    console.log(meal)
     mealLiTemplate = `
         <img src=${meal['strMealThumb']} alt="${meal['strMeal']}" ><span>${meal['strMeal']}</span><button d="${meal.idMeal}" class="remove-meal-fav"><i class="fas fa-window-close"></i></button>
     `

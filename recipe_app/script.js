@@ -22,12 +22,6 @@ async function searchMealByName(name) {
 
     return data
 }
-async function searchById(id) {
-    const response = await fetch(apiCalls['getMealById']+id)
-    const mealData = await response.json()
-    console.log(mealData)
-}
-
 function createMeal(meal, isRandom=false) {
 
     mealTemp = `            

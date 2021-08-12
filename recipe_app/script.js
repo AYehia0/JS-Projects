@@ -62,7 +62,6 @@ function createMeal(meal, isRandom=false) {
                 // changing the heart button onClick to active
                 if (btn.classList.contains('active')){
 
-                    console.log(meal)
                     // remove it
                     btn.classList.remove('active')
                     removeMealFromLocalStorage(meal)
@@ -84,22 +83,29 @@ function getMealsFromLocalStorage(){
     return meal === null ? [] : meal
 }
 
-
-// add a all meal info to local storage 
-function addMealToLocalStorage(meal) {
-
-    // getting all the ingredints 
+// getting all the ingredints 
+function getAllIngredients(meal) {
     const maxIngred = 20
     const ingredients = []
 
     for(var i=1; i<=maxIngred; i++) {
         let ing = meal[`strIngredient${i}`]
+        let measure = meal[`strMeasure${i}`]
 
         if (!ing) {
             break
         }
-        ingredients.push(ing)
+        ingredients.push(`${ing} / ${measure}`)
     }
+
+    return ingredients
+
+}
+// add a all meal info to local storage 
+function addMealToLocalStorage(meal) {
+
+    // getting all the ingredints 
+    const ingredients = getAllIngredients(meal)
 
     const mealTemplate = {
         idMeal: meal['idMeal'],
@@ -117,7 +123,7 @@ function addMealToLocalStorage(meal) {
     localStorage.setItem('meal', JSON.stringify(meals))
 
     // reloading the page
-    reloadPage(500)
+    reloadPage(5000)
 
 }
 
@@ -168,6 +174,8 @@ function addMealToFav(meal){
 
     // adding to the html
     favMealContainer.appendChild(favLi)
+
+    // Here
 }
 
 // get the liked meals from localStorage then add to the top of the page
@@ -223,6 +231,7 @@ searchBtn.addEventListener('click', async () => {
     const searchValue = searchInput.value
 
     const meals = await searchMealByName(searchValue)
+    let topMeals = meals.slice(0,5)
 
     // if it's not null value aka empty
     if (searchValue) {
@@ -230,14 +239,13 @@ searchBtn.addEventListener('click', async () => {
         if (meals) {
             // displaying top 5 meals
 
-            let topFiveMeals = meals.slice(0,5)
-
-            topFiveMeals.forEach(meal =>{
+            topMeals.forEach(meal =>{
                 createMeal(meal, false)
             })
         }
     }
 
+    // liking meals aka adding to fav
     const btns = document.querySelectorAll('.fav-btn')
 
     btns.forEach( (btnFav, ind) => {
@@ -245,7 +253,7 @@ searchBtn.addEventListener('click', async () => {
         btnFav.addEventListener('click', ()=>{
         
             // get meal from html container 
-            const meal = meals[ind]
+            const meal = topMeals[ind]
 
             // changing the heart button onClick to active
             if (btnFav.classList.contains('active')){
@@ -262,7 +270,59 @@ searchBtn.addEventListener('click', async () => {
 
         })
     })
+
+    //showing meal details 
+    // checking if one of the meals is clicked
+    const mealDetails = document.querySelectorAll('.meal-header img')
+
+    mealDetails.forEach((img, ind) =>{
+        img.addEventListener('click', ()=>{
+
+            const mealDetailCont = document.querySelector('.meal-detail-container')
+            mealDetailCont.classList.remove('hidden')
+
+            // showing the contents
+            updateMealDetails(topMeals[ind])
+        })
+    })
 })
+
+
+// update the html with all the details of the meal after removing the hidden class
+function updateMealDetails(meal) {
+
+    const mealDetailContainer = document.querySelector('.meal-detail')
+
+    // ingredients 
+    const ingredients = getAllIngredients(meal)
+
+    // ToDo: add Yt link to the html card
+    mealTemp = `
+                <h1>${meal.strMeal}</h1>
+
+                <img src="${meal.strMealThumb}" alt="">
+
+                <p>
+                    ${meal.strInstructions}
+                </p>
+
+                <h3>Ingredients:</h3>
+                <ul>
+                    ${ingredients.map( (ing) => `<li>${ing}</li>` ).join("")}
+                </ul>    
+
+    `
+    mealDetailContainer.innerHTML = mealTemp
+}
+
 getRandomMeal()
 updateMealsToFav()
 removeMeal()
+
+const closePopupBtn = document.querySelector('#close-popup')
+
+closePopupBtn.addEventListener('click', ()=>{
+    // change the class to hidden 
+    document.querySelector('.meal-detail-container').classList.add('hidden')
+})
+

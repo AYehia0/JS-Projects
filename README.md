@@ -1,14 +1,14 @@
 # JS-Projects
 Practicing web-dev by doing already made projects, by following good practice and my lol practice in CSS/JS.
 
-# Ramadan countdown timer
+## Ramadan countdown timer
 
 In this project, i learned how to create a counter to count days, hours, mins and secs till a specific date.
 
 Try it now:
   [When is Ramadan?](https://ayehia0.github.io/JS-Projects/countdown_timer/)
 
-# Quiz app
+## Quiz app
 
 Things i learned: 
   - How to generate questions to a template.
@@ -17,7 +17,7 @@ Things i learned:
 Try it now:
   [Test your programming knowledge](https://ayehia0.github.io/JS-Projects/quiz_app/)
 
-# Recipe app
+## Recipe app
 
 Fetching meals using (TheMealDB Api)[https://www.themealdb.com/api.php]
 

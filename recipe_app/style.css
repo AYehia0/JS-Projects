@@ -156,3 +156,46 @@ header {
 #search-btn {
     cursor: pointer;
 }
+
+.meal-detail-container {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+/* this is how to hide the container  */
+.meal-detail-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+#meal-detail-header {
+    position: relative;
+    background-color: white;
+    padding: 1.3rem;
+    border-radius: .4rem;
+    max-width: 600px;
+    max-height: 100vh;
+
+    /* this is how to scroll if contents are so long */
+    overflow: auto;
+    width: 100%;
+}
+
+#meal-detail-header h1{
+    text-align: center;
+}
+
+#close-popup {
+    position: absolute;
+    right: 20px;
+    background-color: transparent;
+    font-size: 1.4rem;
+    border: none;
+    cursor: pointer;
+}

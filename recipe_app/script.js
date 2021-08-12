@@ -54,22 +54,26 @@ function createMeal(meal, isRandom=false) {
 
     mealContainer.appendChild(mealToBeAdded)
 
-    const btn = mealContainer.querySelector('.fav-btn')
-    btn.addEventListener('click', ()=>{
+    if (isRandom) {
+        const btn = document.querySelector('.fav-btn')
 
-        // changing the heart button onClick to active
-        if (btn.classList.contains('active')){
+            btn.addEventListener('click', ()=>{
 
-            // remove it
-            btn.classList.remove('active')
-            removeMealFromLocalStorage(meal)
-        }else{
+                // changing the heart button onClick to active
+                if (btn.classList.contains('active')){
 
-            // add it
-            btn.classList.add('active')
-            addMealToLocalStorage(meal)
-        }
-    })
+                    console.log(meal)
+                    // remove it
+                    btn.classList.remove('active')
+                    removeMealFromLocalStorage(meal)
+                }else{
+
+                    // add it
+                    btn.classList.add('active')
+                    addMealToLocalStorage(meal)
+                }
+        })
+    } 
 }
 
 function getMealsFromLocalStorage(){
@@ -113,7 +117,7 @@ function addMealToLocalStorage(meal) {
     localStorage.setItem('meal', JSON.stringify(meals))
 
     // reloading the page
-    //reloadPage(500)
+    reloadPage(500)
 
 }
 
@@ -218,9 +222,10 @@ searchBtn.addEventListener('click', async () => {
     //getting the search value
     const searchValue = searchInput.value
 
+    const meals = await searchMealByName(searchValue)
+
     // if it's not null value aka empty
     if (searchValue) {
-        const meals = await searchMealByName(searchValue)
 
         if (meals) {
             // displaying top 5 meals
@@ -232,6 +237,31 @@ searchBtn.addEventListener('click', async () => {
             })
         }
     }
+
+    const btns = document.querySelectorAll('.fav-btn')
+
+    btns.forEach( (btnFav, ind) => {
+
+        btnFav.addEventListener('click', ()=>{
+        
+            // get meal from html container 
+            const meal = meals[ind]
+
+            // changing the heart button onClick to active
+            if (btnFav.classList.contains('active')){
+
+                // remove it
+                btnFav.classList.remove('active')
+                removeMealFromLocalStorage(meal)
+            }else{
+
+                // add it
+                btnFav.classList.add('active')
+                addMealToLocalStorage(meal)
+            }
+
+        })
+    })
 })
 getRandomMeal()
 updateMealsToFav()

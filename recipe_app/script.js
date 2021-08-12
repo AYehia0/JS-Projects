@@ -127,8 +127,8 @@ function addMealToLocalStorage(meal) {
 
 }
 
+function getMealIndexFromLocalStorageById(mealId, meals) {
 
-function removeMealById(mealId, meals) {
     // searching 
     var ind
     for(var i=0; i<meals.length; i++){
@@ -137,6 +137,12 @@ function removeMealById(mealId, meals) {
             break
         }
     }
+    return ind
+}
+
+function removeMealById(mealId, meals) {
+
+    const ind = getMealIndexFromLocalStorageById(mealId, meals)
     // removing
     // The splice() method changes the contents of an array by removing or replacing existing elements and/or adding new elements in place
     // short the shit : it removes at index
@@ -165,7 +171,7 @@ function removeMealFromLocalStorage(meal) {
 function addMealToFav(meal){
 
     mealLiTemplate = `
-        <img src=${meal['strMealThumb']} alt="${meal['strMeal']}" ><span>${meal['strMeal']}</span><button d="${meal.idMeal}" class="remove-meal-fav"><i class="fas fa-window-close"></i></button>
+        <img src=${meal['strMealThumb']} alt="${meal['strMeal']}" d="${meal.idMeal}" ><span>${meal['strMeal']}</span><button  class="remove-meal-fav"><i class="fas fa-window-close"></i></button>
     `
 
     const favLi = document.createElement('li')
@@ -194,11 +200,11 @@ function updateMealsToFav() {
 }
 function removeMeal(){
     // checking for remove
-    const removeButton = document.querySelectorAll('.remove-meal-fav')
-    removeButton.forEach( el =>{
-        el.addEventListener('click', () => {
+    const favMeals = document.querySelectorAll('.fav-meals li')
+    favMeals.forEach( el =>{
+        el.querySelector('button').addEventListener('click', () => {
             // delete 
-            const id = el.getAttribute('d')
+            const id = el.querySelector('img').getAttribute('d')
 
             // getting data from localStorage
             const meals = getMealsFromLocalStorage()
@@ -278,23 +284,25 @@ searchBtn.addEventListener('click', async () => {
     mealDetails.forEach((img, ind) =>{
         img.addEventListener('click', ()=>{
 
+            // the meal 
+            const meal = topMeals[ind]
             const mealDetailCont = document.querySelector('.meal-detail-container')
             mealDetailCont.classList.remove('hidden')
 
+            // ingredients 
+            const ingredients = getAllIngredients(meal)
+
             // showing the contents
-            updateMealDetails(topMeals[ind])
+            updateMealDetails(meal, ingredients)
         })
     })
 })
 
 
 // update the html with all the details of the meal after removing the hidden class
-function updateMealDetails(meal) {
+function updateMealDetails(meal, ingredients) {
 
     const mealDetailContainer = document.querySelector('.meal-detail')
-
-    // ingredients 
-    const ingredients = getAllIngredients(meal)
 
     // ToDo: add Yt link to the html card
     mealTemp = `
@@ -324,5 +332,32 @@ const closePopupBtn = document.querySelector('#close-popup')
 closePopupBtn.addEventListener('click', ()=>{
     // change the class to hidden 
     document.querySelector('.meal-detail-container').classList.add('hidden')
+})
+
+const favImgs = document.querySelectorAll('.fav-meals li img')
+
+favImgs.forEach(img => {
+    img.addEventListener('click', ()=>{
+        
+        // getting meal from localStorage
+        // getting the mealId 
+        let mealId = img.getAttribute('d')
+
+        const meals = getMealsFromLocalStorage()
+
+        const mealIndex = getMealIndexFromLocalStorageById(mealId, meals)
+
+        const meal = meals[mealIndex]
+        // getting the ingredients from the localStorage is different from the getAllIngredents
+        const ingredients = meal.strIngredients
+
+        // removing the hidden class to append the meal data to the html
+        const mealDetailCont = document.querySelector('.meal-detail-container')
+        mealDetailCont.classList.remove('hidden')
+
+        // updating the popup meal container 
+        updateMealDetails(meal, ingredients)
+
+    })
 })
 

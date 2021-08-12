@@ -66,6 +66,22 @@ function createMeal(meal, isRandom=false) {
                     addMealToLocalStorage(meal)
                 }
         })
+
+        const mealContainer = document.querySelector('.meal-container img')
+
+        mealContainer.addEventListener('click', ()=>{
+
+            const ingredients = getAllIngredients(meal)
+
+            // removing the hidden class to append the meal data to the html
+            const mealDetailCont = document.querySelector('.meal-detail-container')
+            mealDetailCont.classList.remove('hidden')
+
+            // updating the popup meal container 
+            updateMealDetails(meal, ingredients)
+
+        })
+
     } 
 }
 
@@ -231,6 +247,8 @@ searchBtn.addEventListener('click', async () => {
     const searchValue = searchInput.value
 
     const meals = await searchMealByName(searchValue)
+
+    // ToDo : check for null if no meals 
     let topMeals = meals.slice(0,5)
 
     // if it's not null value aka empty
@@ -290,6 +308,7 @@ searchBtn.addEventListener('click', async () => {
             updateMealDetails(meal, ingredients)
         })
     })
+
 })
 
 

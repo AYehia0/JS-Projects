@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Georama:ital,wght@1,300&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Georama", sans-serif;
+    background-color: #e67e22;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+}
+
+.notes-container {
+    background-color: white;
+    margin: 40px;
+    width: 400px;
+    height: 400px;
+}
+
+.notes-tools {
+    background-color: #2ecc71;
+    display: flex;
+
+    /* from left to right */
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.notes-tools button {
+    background-color: transparent;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    margin: 1px;
+    color: white;
+}
+.note textarea {
+    font: inherit;
+    font-size: 1.4rem;
+    border: none;
+    width: 400px;
+    height: 400px;
+}

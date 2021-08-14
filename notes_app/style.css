@@ -6,7 +6,7 @@
 
 body {
     font-family: "Georama", sans-serif;
-    background-color: #e67e22;
+    background-color: #74b9ff;
     display: flex;
     flex-wrap: wrap;
     margin: 0;
@@ -36,10 +36,35 @@ body {
     margin: 1px;
     color: white;
 }
-.note textarea {
+textarea {
     font: inherit;
     font-size: 1.4rem;
     border: none;
     width: 400px;
+    height: 100%;
+    outline: none;
+}
+
+.notes-container .note {
+    background-color: white;
     height: 400px;
+    width: 100%;
+    overflow: hidden;
+}
+.notes-container .hidden {
+    display: none;
+}
+
+.add-note {
+    background-color: #d63031;
+    border: none;
+    position: fixed;
+    margin: 2rem auto;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+
 }

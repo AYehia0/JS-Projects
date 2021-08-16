@@ -19,7 +19,7 @@ Try it now:
 
 ## Recipe app
 
-Fetching meals using (TheMealDB Api)[https://www.themealdb.com/api.php]
+Fetching meals using [TheMealDB Api](https://www.themealdb.com/api.php)
 
 Features:
   - Searching for meals.
@@ -33,3 +33,14 @@ ToDo:
   
 Try it now:
   [Food? why not?](https://ayehia0.github.io/JS-Projects/recipe_app/)
+
+## Todo app
+
+Keep track of things you are going to be doing.
+
+Try it now: 
+[Todo Me](https://ayehia0.github.io/JS-Projects/todo_app)
+
+ToDo:
+ - [ ] Add Time reminder 
+ - [ ] Remove duplicate code to a function

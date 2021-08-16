@@ -6,23 +6,26 @@ function updateHtmlFromLS() {
     
     const todosItems = JSON.parse(localStorage.getItem('todos'))
 
-    todosItems.forEach(todoEl => {
+    if (todosItems) {
 
-        // create li for each item
-        let liEl = document.createElement('li')
-        
-        // setting the text of the todoEl
-        liEl.innerText = todoEl.text
+        todosItems.forEach(todoEl => {
 
-        // setting the completed class if true
-        if (todoEl.completed) {
-            liEl.classList.toggle('completed')
-        }
+            // create li for each item
+            let liEl = document.createElement('li')
+            
+            // setting the text of the todoEl
+            liEl.innerText = todoEl.text
 
-        // adding to the html
-        document.querySelector('.list-container ul').appendChild(liEl)
-    })
+            // setting the completed class if true
+            if (todoEl.completed) {
+                liEl.classList.toggle('completed')
+            }
 
+            // adding to the html
+            document.querySelector('.list-container ul').appendChild(liEl)
+        })
+
+    }
 }
 
 function updateLS() {

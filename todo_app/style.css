@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Georama:ital,wght@1,300&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Georama", sans-serif;
+    margin: 0;
+}
+
+.main-container {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+#form-submit {
+    justify-content: center;
+}
+
+.todo-input {
+    width: 400px;
+    height: 40px;
+    padding: 10px;
+    font: inherit;
+    font-size: 2rem;
+    text-align: center;
+    color: rgb(88, 202, 206);
+    border: none;
+    outline: none;
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); */
+}
+h1 {
+    text-align: center;
+    font-size: 5rem;
+    color: rgb(97, 194, 170);
+    opacity: 0.5;
+}
+
+.list-container ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color:  rgb(201, 233, 230);
+    border-radius: 4px;
+    box-shadow: 5px 5px rgb(109, 161, 156);
+}
+
+.list-container li {
+    border-top: 1px solid rgb(109, 161, 156);
+    font-size: 1.5rem;
+    padding: 10px;
+    cursor: pointer;
+}
+.list-container li.completed {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.main-container small {
+    margin-top: 20px;
+    text-align: center;
+}

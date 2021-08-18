@@ -34,6 +34,13 @@ ToDo:
 Try it now:
   [Food? why not?](https://ayehia0.github.io/JS-Projects/recipe_app/)
 
+## Notes app
+
+Write down your notes.
+
+Try it now:
+  [NoteMe](https://ayehia0.github.io/JS-Projects/notes_app/)
+
 ## Todo app
 
 Keep track of things you are going to be doing.

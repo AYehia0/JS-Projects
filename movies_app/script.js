@@ -1,16 +1,14 @@
 // it's better to hide the api key in the backend by creating a server
 const API_KEY = keys.API_KEY
-
 const API_URL = 'https://api.themoviedb.org/3'
-
 const IMG_URL = 'https://image.tmdb.org/t/p/w1280'
-
 const movies_collections = `${API_URL}/discover/movie?sort_by=popularity.desc&api_key=${API_KEY}`
+const search_movies = `${API_URL}/search/movie?sort_by=popularity.desc&api_key=${API_KEY}&query=`
 
+async function getMovieCollections(url) {
 
-async function getMovieCollections() {
     // making a get request 
-    const res = await fetch(movies_collections)
+    const res = await fetch(url)
     const data = await res.json()
 
     return data
@@ -22,7 +20,6 @@ function addMoviesToHtml(movies) {
 
     // make sure that the html is clean
     mainContainer.innerHTML = ""
-
 
     movies.forEach(movie => {
         
@@ -51,10 +48,7 @@ function addMoviesToHtml(movies) {
 async function mainMoviesList (){
 
     // getting the movies
-    const movies = await getMovieCollections()
-
-
-    console.log(movies.results)
+    const movies = await getMovieCollections(movies_collections)
 
     addMoviesToHtml(movies.results)
 
@@ -65,5 +59,31 @@ function getRateColor(rate) {
     if (rate >= 5) return "orange"
     return "red"
 }
-console.log("hello world")
+
+
 mainMoviesList()
+
+const searchForm = document.getElementById('search-form')
+const searchWord = document.getElementById('searchMovie')
+
+searchForm.addEventListener('submit', async (e) => {
+
+    // disable default 
+    e.preventDefault()
+    
+
+    // getting the value
+    const value = searchWord.value
+
+    if (value) {
+
+        // searching the api
+        const movies = await getMovieCollections(search_movies + value)
+
+        //showing the movies 
+        addMoviesToHtml(movies.results)
+
+        searchWord.value = ""
+    }
+    
+})

@@ -37,6 +37,10 @@ function addMoviesToHtml(movies) {
                 <h3>${movie.title}</h3>
                 <span class="${ratingColor}">${movie.vote_average}</span>
             </div>
+            <div class="overview">
+                <h4>Overview:</h4>
+                ${movie.overview}
+            </div>
         `
 
         // appending to the html
@@ -86,7 +90,6 @@ searchForm.addEventListener('submit', async (e) => {
         // searching the api
         const movies = await getMovieCollections(search_movies + value)
 
-        console.log(movies)
         //showing the movies 
         addMoviesToHtml(movies.results)
 

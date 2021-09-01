@@ -78,4 +78,9 @@ header {
     text-align: center;
 }
 
+.search:focus {
+    background-color: #22254b;
+    outline: none;
+}
+
 

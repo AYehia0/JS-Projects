@@ -21,6 +21,12 @@ function addMoviesToHtml(movies) {
     // make sure that the html is clean
     mainContainer.innerHTML = ""
 
+    // checking if there is no movies 
+    if (movies.length == 0) {
+        console.log(movies.results)
+        mainContainer.innerHTML = "<h1 style='color:white'>No results</h1>"
+    }
+
     movies.forEach(movie => {
         
         const movieUrl = IMG_URL + movie.poster_path
@@ -80,6 +86,7 @@ searchForm.addEventListener('submit', async (e) => {
         // searching the api
         const movies = await getMovieCollections(search_movies + value)
 
+        console.log(movies)
         //showing the movies 
         addMoviesToHtml(movies.results)
 

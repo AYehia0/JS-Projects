@@ -16,6 +16,8 @@ body {
     padding: 20px;
 }
 .movie {
+    position: relative;
+    overflow: hidden;
     background-color: #373b69;
     width: 250px;
     margin: 1.8rem;
@@ -83,4 +85,19 @@ header {
     outline: none;
 }
 
-
+.overview {
+    background-color: white;
+    max-height: 100%;
+    overflow: auto;
+    padding: 1.5rem;
+    color: black;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(101%);
+    transition: transform 0.3s ease-in;
+}
+.movie:hover .overview{
+    transform: translateY(0);
+}

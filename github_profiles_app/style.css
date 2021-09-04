@@ -20,6 +20,8 @@ body {
     background-color: #575fcf;
     display: flex;
     padding: 4rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 .user-container img {
     width: 150px;
@@ -27,3 +29,13 @@ body {
     border-radius: 50%;
 }
 
+.profile-info {
+    margin-left: 30px;
+}
+
+.profile-info ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    margin-left: -30px;
+}
